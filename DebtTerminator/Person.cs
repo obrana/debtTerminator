@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DebtTerminator
 {
-    class Program
+  public   class Person
     {
         static void Main(string[] args)
         {
