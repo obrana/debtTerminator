@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="PapaJonsDebtTerminator.Views.AddPersonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PapaJonsDebtTerminator.Views"
+             mc:Ignorable="d" Height="140">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="140">
+        <TextBlock HorizontalAlignment="Left" Margin="8,7,0,0" TextWrapping="Wrap" 
+                   Text="Add person" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="8,30,0,0" TextWrapping="Wrap" 
+                   Text="Name:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="8,54,0,0" TextWrapping="Wrap" 
+                   Text="CPR:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="8,77,0,10" TextWrapping="Wrap" 
+                   Text="Address:" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="70,29,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtName"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="70,51,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtCpr"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="70,74,0,10" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtAddress"/>
+        <TextBlock HorizontalAlignment="Left" Margin="193,34,0,0" TextWrapping="Wrap" 
+                   Text="Date of birth:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="193,55,0,0" TextWrapping="Wrap" 
+                   Text="Gender:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="193,77,0,10" TextWrapping="Wrap" 
+                   Text="Phone:" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="268,30,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtDOB"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="268,54,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtGender"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="268,74,0,10" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtPhone"/>
+        <TextBlock HorizontalAlignment="Left" Margin="395,34,0,0" TextWrapping="Wrap" 
+                   Text="Email:" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="436,30,10,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="108" x:Name="TxtEmail"/>
+        <Button Content="Insert" HorizontalAlignment="Left" Margin="395,71,10,10" 
+                VerticalAlignment="Top" Width="150" x:Name="BtnInsert" Click="BtnInsert_OnClick"/>
+    </Grid>
+</UserControl>
