@@ -48,7 +48,7 @@ namespace PapaJonsDebtTerminator.Views
                 CPR = TxtCpr.Text,
                 DOB = (DateTime)dob,
                 Email = TxtEmail.Text,
-                Gender = TxtGender.Text,
+                Gender = CbGender.SelectedValue.ToString(),
                 Name = TxtName.Text,
                 Phone = TxtPhone.Text
             };
