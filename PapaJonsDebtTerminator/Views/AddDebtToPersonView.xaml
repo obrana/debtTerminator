@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="169.324" Width="293.507">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <TextBlock HorizontalAlignment="Left" Margin="-132,-51,0,0" TextWrapping="Wrap" 
-                   Text="Add debt to person" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+                   Text="Add debt to person:" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="-132,-25,0,0" TextWrapping="Wrap" 
                    Text="Debt from:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="-132,-4,0,0" TextWrapping="Wrap" 

@@ -5,34 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PapaJonsDebtTerminator"
         xmlns:views="clr-namespace:PapaJonsDebtTerminator.Views"
-        mc:Ignorable="d"
-        Title="Papa jons - Debt terminator" Height="540.3" Width="612.6">
+        mc:Ignorable="d" Height="520" Width="670"
+        Title="Papa Jon´s - Debt terminator" MinHeight="520" MinWidth="670">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" HorizontalAlignment="Center" MinHeight="155" Margin="10,10,10,10" 
-                  VerticalAlignment="Center" Width="498" x:Name="DataGridPersons"
+        <DataGrid Grid.Row="0" HorizontalAlignment="Stretch" MinHeight="155" Margin="10,10,10.2,10" 
+                  VerticalAlignment="Stretch" x:Name="DataGridPersons"
                   SelectionChanged="DataGridPersons_OnSelectionChanged" SelectionMode="Single" 
                   SelectionUnit="FullRow" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="CPR" Binding="{Binding CPR}"/>
-                <DataGridTextColumn Header="Date of birth" Binding="{Binding DOB}"/>
+                <DataGridTextColumn Header="Date of birth" Binding="{Binding DOB, StringFormat=\{0:dd.MM.yyyy\} }"/>
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
                 <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"/>
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center"
-                Height="100" Margin="10,10,10,10" VerticalAlignment="Center">
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch"
+                Height="100" Margin="10,10,10,10" VerticalAlignment="Stretch">
             <views:AddPersonView x:Name="AddPersonView"/>
         </Border>
-        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" 
-                Margin="10,10,10,10" VerticalAlignment="Center">
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" 
+                Margin="10,10,10,10" VerticalAlignment="Stretch">
             <views:AddDebtToPersonView x:Name="AddDebtView"/>
         </Border>
     </Grid>

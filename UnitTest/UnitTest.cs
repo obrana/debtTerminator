@@ -12,7 +12,7 @@ namespace UnitTest
         [TestInitialize]
         public void BeforeTest()
         {
-            _person = new Person();
+            _person = new Person();          
         }
 
         [TestMethod]
