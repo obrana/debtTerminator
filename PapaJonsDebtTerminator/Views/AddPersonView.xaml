@@ -26,8 +26,8 @@
                    Text="Gender:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="193,77,0,10" TextWrapping="Wrap" 
                    Text="Phone:" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="268,30,0,0" TextWrapping="Wrap" 
-                 VerticalAlignment="Top" Width="108" x:Name="TxtDOB"/>
+        <DatePicker HorizontalAlignment="Left" Height="18" Margin="268,30,0,0"
+                 VerticalAlignment="Top" Width="108" x:Name="DpDob"/>
         <TextBox HorizontalAlignment="Left" Height="18" Margin="268,54,0,0" TextWrapping="Wrap" 
                  VerticalAlignment="Top" Width="108" x:Name="TxtGender"/>
         <TextBox HorizontalAlignment="Left" Height="18" Margin="268,74,0,10" TextWrapping="Wrap" 

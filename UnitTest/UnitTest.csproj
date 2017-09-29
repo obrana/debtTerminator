@@ -55,9 +55,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DebtTerminator\DebtTerminator.csproj">
-      <Project>{810e3236-6f55-4ab5-bba0-ed8132975041}</Project>
-      <Name>DebtTerminator</Name>
+    <ProjectReference Include="..\DbLayer\DbLayer.csproj">
+      <Project>{a4a8c9aa-8c38-4434-aaeb-c750cbc227b2}</Project>
+      <Name>DbLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{79511b16-e79e-401b-95e1-5f9772572e6b}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

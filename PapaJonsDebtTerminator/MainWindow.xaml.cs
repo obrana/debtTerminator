@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Models;
+using PapaJonsDebtTerminator.Views;
 
 namespace PapaJonsDebtTerminator
 {
@@ -31,7 +33,24 @@ namespace PapaJonsDebtTerminator
         {
             database = DbLayer.DbLayer.Database;
 
+            AddPersonView.MainWindow = this;
+            
+            LoadPersons();
+        }
+
+        public void LoadPersons()
+        {
             DataGridPersons.ItemsSource = database.GetPersons();
+            if (DataGridPersons.Items.Count > 0)
+            {
+                DataGridPersons.SelectedItem = DataGridPersons.Items[0];
+            }
+        }
+
+        private void DataGridPersons_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(DataGridPersons.SelectedItem!= null)
+                AddDebtView.SelectedPerson = (Person)DataGridPersons.SelectedItem;
         }
     }
 }

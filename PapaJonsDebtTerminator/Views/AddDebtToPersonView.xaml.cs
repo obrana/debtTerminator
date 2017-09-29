@@ -21,8 +21,19 @@ namespace PapaJonsDebtTerminator.Views
     /// </summary>
     public partial class AddDebtToPersonView : UserControl
     {
-        public Person SelectedPerson { get; set; }
+        public Person SelectedPerson
+        {
+            get { return _selectedPerson; }
+            set
+            {
+                _selectedPerson = value;
+                LblNamePerson.Text = _selectedPerson.Name;
+            }
+        }
+
         private DbLayer.DbLayer database;
+        private Person _selectedPerson;
+
         public AddDebtToPersonView()
         {
             InitializeComponent();
@@ -33,6 +44,7 @@ namespace PapaJonsDebtTerminator.Views
         {
             database = DbLayer.DbLayer.Database;
         }
+
         private void BtnAddDebt_OnClick(object sender, RoutedEventArgs e)
         {
             var debt = new Debt()

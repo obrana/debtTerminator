@@ -14,14 +14,16 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" HorizontalAlignment="Center" MinHeight="155" Margin="10,10,10,10" 
-                  VerticalAlignment="Center" Width="498" x:Name="DataGridPersons"/>
+                  VerticalAlignment="Center" Width="498" x:Name="DataGridPersons"
+                  SelectionChanged="DataGridPersons_OnSelectionChanged" SelectionMode="Single" 
+                  SelectionUnit="FullRow"/>
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center"
                 Height="100" Margin="10,10,10,10" VerticalAlignment="Center">
-           <views:AddPersonView/>
+            <views:AddPersonView x:Name="AddPersonView"/>
         </Border>
         <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" 
                 Margin="10,10,10,10" VerticalAlignment="Center">
-            <views:AddDebtToPersonView/>
+            <views:AddDebtToPersonView x:Name="AddDebtView"/>
         </Border>
     </Grid>
 </Window>

@@ -23,6 +23,9 @@ namespace PapaJonsDebtTerminator.Views
     public partial class AddPersonView : UserControl
     {
         private DbLayer.DbLayer database;
+        private MainWindow _mainWindow;
+
+        public MainWindow MainWindow { get; set; }
         public AddPersonView()
         {
             InitializeComponent();
@@ -37,18 +40,21 @@ namespace PapaJonsDebtTerminator.Views
 
         private void BtnInsert_OnClick(object sender, RoutedEventArgs e)
         {
+            var dob = DpDob.SelectedDate;
+
             var person = new Person()
             {
                 Address = TxtAddress.Text,
                 CPR = TxtCpr.Text,
-                DOB = DateTime.Parse(TxtDOB.Text),
+                DOB = (DateTime)dob,
                 Email = TxtEmail.Text,
                 Gender = TxtGender.Text,
                 Name = TxtName.Text,
                 Phone = TxtPhone.Text
             };
 
-            database.AddPerson(person);
+            var result = database.AddPerson(person);
+            if (result) this.MainWindow.LoadPersons();
         }
     }
 }

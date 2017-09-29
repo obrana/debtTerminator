@@ -4,32 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PapaJonsDebtTerminator.Views"
-             mc:Ignorable="d" Height="169.324" Width="196.267">
+             mc:Ignorable="d" Height="169.324" Width="293.507">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock HorizontalAlignment="Left" Margin="-87,-51,-51,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="-132,-51,0,0" TextWrapping="Wrap" 
                    Text="Add debt to person" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-87,-26,0,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="-132,-25,0,0" TextWrapping="Wrap" 
                    Text="Debt from:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-87,-4,0,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="-132,-4,0,0" TextWrapping="Wrap" 
                    Text="Debt to:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-87,20,0,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="-132,20,0,0" TextWrapping="Wrap" 
                    Text="Debt status:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-87,43,0,-3.8" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="-132,44,0,-3.8" TextWrapping="Wrap" 
                    Text="Paid amout" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-20,-28,-88,0" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,-28,-30.2,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtDateFrom"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-20,-6,-88,0" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,-6,-30.2,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtDateTo"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-20,18,-88,0" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,18,-30.2,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtDebtStatus"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-20,41,-88,-3.8" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,41,-30.2,-3.8" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtPaidAmout"/>
-        <Button Content="Add debt" HorizontalAlignment="Left" Margin="-19,87,-89,-49.8" 
+        <Button Content="Add debt" HorizontalAlignment="Left" Margin="-64,87,-31.2,-49.8" 
                 VerticalAlignment="Top" Width="108" Height="18" x:Name="BtnAddDebt"
                 Click="BtnAddDebt_OnClick"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-87,66,0,-26.8" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="-132,66,0,-25.8" TextWrapping="Wrap" 
                    Text="Amout:" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-20,64,-88,-26.8" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,64,-30.2,-26.8" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtAmout"/>
+        <TextBlock HorizontalAlignment="Left" Margin="18,-51,-135.2,0" TextWrapping="WrapWithOverflow" 
+                   x:Name="LblNamePerson" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Width="130"/>
     </Grid>
 </UserControl>

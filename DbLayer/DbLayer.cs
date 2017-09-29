@@ -1,5 +1,4 @@
-﻿#define Test
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -25,19 +24,11 @@ namespace DbLayer
 
         private DbLayer()
         {
-#if Test
-            _connection = new SqlConnection("Server=tcp:lackopeter.database.windows.net,1433;Initial "
+            _connectionString = "Server=tcp:lackopeter.database.windows.net,1433;Initial "
                 + "Catalog=SchoolDatabase;Persist Security Info=False;User ID=peterlacko ;Password = Admin1122;"
-                + "MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-#endif
+                + "MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-            //_connection = new SqlConnection(_connectionString);
-        }
-
-        public string ConnectionString
-        {
-            get { return _connectionString; }
-            set { _connectionString = value; }
+            _connection = new SqlConnection(_connectionString);
         }
 
         public static DbLayer Database
@@ -56,7 +47,7 @@ namespace DbLayer
         {
             var affectedRows = 0;
 
-            using (_connection)
+            try
             {
                 _connection.Open();
                 using (var command = new SqlCommand(AddPersonCommand, _connection))
@@ -71,67 +62,80 @@ namespace DbLayer
 
                     affectedRows = command.ExecuteNonQuery();
                 }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+                
             }
 
             return affectedRows > 0;
         }
 
-    public bool AddDebtToPerson(Person person, Debt debt)
-    {
-        var affectedRows = 0;
-        using (_connection)
+        public bool AddDebtToPerson(Person person, Debt debt)
         {
-            _connection.Open();
-            using (var command = new SqlCommand(AddDebtToPersonCommand, _connection))
+            var affectedRows = 0;
+            try
             {
-                command.Parameters.AddWithValue("@PersonId", person.PersonId);
-                command.Parameters.AddWithValue("@Ammount", debt.Amout);
-                command.Parameters.AddWithValue("@DateStart", debt.DateStart);
-                command.Parameters.AddWithValue("@DueDate", debt.DueDate);
-                command.Parameters.AddWithValue("@DebtStatus", debt.DebtStatus);
-                command.Parameters.AddWithValue("@PaidAmmount", debt.PaidAmout);
-
-                affectedRows = command.ExecuteNonQuery();
-            }
-            _connection.Close();
-        }
-
-        return affectedRows > 0;
-    }
-    public IEnumerable<Person> GetPersons()
-    {
-        var persons = new List<Person>();
-
-        using (_connection)
-        {
-            _connection.Open();
-            using (var command = new SqlCommand(GetPersonsCommand, _connection))
-            {
-                var reader = command.ExecuteReader();
-                while (reader.Read())
+                _connection.Open();
+                using (var command = new SqlCommand(AddDebtToPersonCommand, _connection))
                 {
-                    persons.Add(CreatePerson(reader));
+                    command.Parameters.AddWithValue("@PersonId", person.PersonId);
+                    command.Parameters.AddWithValue("@Ammount", debt.Amout);
+                    command.Parameters.AddWithValue("@DateStart", debt.DateStart);
+                    command.Parameters.AddWithValue("@DueDate", debt.DueDate);
+                    command.Parameters.AddWithValue("@DebtStatus", debt.DebtStatus);
+                    command.Parameters.AddWithValue("@PaidAmmount", debt.PaidAmout);
+
+                    affectedRows = command.ExecuteNonQuery();
                 }
+                _connection.Close();
             }
-            _connection.Close();
+            catch (Exception ex)
+            {
+
+            }
+
+            return affectedRows > 0;
+        }
+        public IEnumerable<Person> GetPersons()
+        {
+            var persons = new List<Person>();
+
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(GetPersonsCommand, _connection))
+                {
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        persons.Add(CreatePerson(reader));
+                    }
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return persons;
         }
 
-        return persons;
-    }
-
-    private Person CreatePerson(SqlDataReader reader)
-    {
-        return new Person()
+        private Person CreatePerson(SqlDataReader reader)
         {
-            PersonId = reader.GetInt32(0),
-            Name = reader.GetString(1),
-            CPR = reader.GetString(2),
-            Address = reader.GetString(3),
-            DOB = reader.GetDateTime(4),
-            Gender = reader.GetString(5),
-            Email = reader.GetString(6),
-            Phone = reader.GetString(7)
-        };
+            return new Person()
+            {
+                PersonId = reader.GetInt32(0),
+                Name = reader.GetString(1),
+                CPR = reader.GetString(2),
+                Address = reader.GetString(3),
+                DOB = reader.GetDateTime(4),
+                Gender = reader.GetString(5),
+                Email = reader.GetString(6),
+                Phone = reader.GetString(7)
+            };
+        }
     }
-}
 }
