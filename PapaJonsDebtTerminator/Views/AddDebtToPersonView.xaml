@@ -16,12 +16,13 @@
                    Text="Debt status:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="-132,44,0,-3.8" TextWrapping="Wrap" 
                    Text="Paid amout" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,-28,-30.2,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtDateFrom"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,-6,-30.2,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtDateTo"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,18,-30.2,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtDebtStatus"/>
+        <DatePicker HorizontalAlignment="Left" Height="18" Margin="-65,-28,-30.2,0" 
+                 VerticalAlignment="Top" Width="108" x:Name="DpDateFrom"/>
+        <DatePicker HorizontalAlignment="Left" Height="18" Margin="-65,-6,-30.2,0"
+                 VerticalAlignment="Top" Width="108" x:Name="DpDateTo"/>
+        <CheckBox HorizontalAlignment="Left" Height="18" Margin="-65,18,-30.2,0" 
+                 VerticalAlignment="Top" Width="108" x:Name="ChbDebtStatus" 
+                 Content="Paid/Unpaid" Checked="ChbDebtStatus_OnChecked"/>
         <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,41,-30.2,-3.8" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtPaidAmout"/>
         <Button Content="Add debt" HorizontalAlignment="Left" Margin="-64,87,-31.2,-49.8" 

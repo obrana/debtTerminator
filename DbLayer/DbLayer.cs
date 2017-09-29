@@ -15,8 +15,8 @@ namespace DbLayer
                                 + " values(@Name,@CPR,@Adress,@DOB,@Gender,@Email,@Phone)";
         private const string GetPersonsCommand = "select PersonId,Name,CPR,Adress,DOB,Gender,Email,Phone"
                                                 + " from Person";
-        private const string AddDebtToPersonCommand = "insert into Debt(PersonId,Ammount,DateStart,DueDate,DebtStatus,PaidAmmount)"
-                                                       + " values(@PersonId,@Ammount,@DateStart,@DueDate,@DebtStatus,@PaidAmmount)";
+        private const string AddDebtToPersonCommand = "insert into Debt(PersonId,Amount,DateStart,DueDate,DebtStatus,PaidAmount)"
+                                                       + " values(@PersonId,@Amount,@DateStart,@DueDate,@DebtStatus,@PaidAmount)";
 
         private static DbLayer _database;
         private SqlConnection _connection;
@@ -81,11 +81,11 @@ namespace DbLayer
                 using (var command = new SqlCommand(AddDebtToPersonCommand, _connection))
                 {
                     command.Parameters.AddWithValue("@PersonId", person.PersonId);
-                    command.Parameters.AddWithValue("@Ammount", debt.Amout);
+                    command.Parameters.AddWithValue("@Amount", debt.Amout);
                     command.Parameters.AddWithValue("@DateStart", debt.DateStart);
                     command.Parameters.AddWithValue("@DueDate", debt.DueDate);
                     command.Parameters.AddWithValue("@DebtStatus", debt.DebtStatus);
-                    command.Parameters.AddWithValue("@PaidAmmount", debt.PaidAmout);
+                    command.Parameters.AddWithValue("@PaidAmount", debt.PaidAmout);
 
                     affectedRows = command.ExecuteNonQuery();
                 }

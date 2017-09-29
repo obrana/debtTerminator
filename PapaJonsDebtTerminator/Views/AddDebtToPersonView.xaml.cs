@@ -47,16 +47,24 @@ namespace PapaJonsDebtTerminator.Views
 
         private void BtnAddDebt_OnClick(object sender, RoutedEventArgs e)
         {
+            var dateFrom = DpDateFrom.SelectedDate;
+            var dateTo = DpDateTo.SelectedDate;
+
             var debt = new Debt()
             {
                 Amout = decimal.Parse(TxtAmout.Text),
-                DateStart = DateTime.Parse(TxtDateFrom.Text),
-                DebtStatus = bool.Parse(TxtDebtStatus.Text),
-                DueDate = DateTime.Parse(TxtDateTo.Text),
+                DateStart = (DateTime)dateFrom,
+                DebtStatus = (bool)ChbDebtStatus.IsChecked,
+                DueDate = (DateTime)dateTo,
                 PaidAmout = decimal.Parse(TxtPaidAmout.Text)
             };
 
             database.AddDebtToPerson(SelectedPerson, debt);
+        }
+
+        private void ChbDebtStatus_OnChecked(object sender, RoutedEventArgs e)
+        {
+            ChbDebtStatus.Content = (bool)ChbDebtStatus.IsChecked?"Paid":"Unpaid";
         }
     }
 }
