@@ -18,6 +18,11 @@ namespace DbLayer
         private const string AddDebtToPersonCommand = "insert into Debt(PersonId,Amount,DateStart,DueDate,DebtStatus,PaidAmount)"
                                                        + " values(@PersonId,@Amount,@DateStart,@DueDate,@DebtStatus,@PaidAmount)";
 
+        private const string GetDebtsOfPersonCommand = "select PersonId, Amount, DateStart, DebtId, DebtStatus, DueDate, PaidAmount "
+                                                        + " from Debt where PersonId=@PersonId";
+
+        private const string PersonExistCommand = "select * from Person where CPR=@CPR";
+
         private static DbLayer _database;
         private SqlConnection _connection;
         private string _connectionString;
@@ -45,6 +50,10 @@ namespace DbLayer
 
         public bool AddPerson(Person person)
         {
+            if (PersonExist(person))
+            {
+                return false;
+            }
             var affectedRows = 0;
 
             try
@@ -71,9 +80,35 @@ namespace DbLayer
 
             return affectedRows > 0;
         }
+        private bool PersonExist(Person person)
+        {
+            var exist = false;
 
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(PersonExistCommand, _connection))
+                {
+                    command.Parameters.AddWithValue("@CPR", person.CPR);
+
+                    var reader = command.ExecuteReader();
+                    exist= reader.HasRows;
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return exist;
+        }
         public bool AddDebtToPerson(Person person, Debt debt)
         {
+            if (debt.Amout < 0)
+            {
+                return false;
+            }
             var affectedRows = 0;
             try
             {
@@ -121,6 +156,45 @@ namespace DbLayer
             }
 
             return persons;
+        }
+        public IEnumerable<Debt> GetDebtsOfPerson(Person person)
+        {
+            var debts = new List<Debt>();
+
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(GetDebtsOfPersonCommand, _connection))
+                {
+                    command.Parameters.AddWithValue("@PersonId", person.PersonId);
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        debts.Add(CreateDebt(reader));
+                    }
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return debts;
+        }
+
+        private Debt CreateDebt(SqlDataReader reader)
+        {
+            return new Debt()
+            {
+                PersonId = reader.GetInt32(0),
+                Amout = reader.GetDecimal(1),
+                DateStart = reader.GetDateTime(2),
+                DebtId = reader.GetInt32(3),
+                DebtStatus = reader.GetBoolean(4),
+                DueDate = reader.GetDateTime(5),
+                PaidAmout = reader.GetDecimal(6)              
+            };
         }
 
         private Person CreatePerson(SqlDataReader reader)
