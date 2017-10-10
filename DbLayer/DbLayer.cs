@@ -211,5 +211,37 @@ namespace DbLayer
                 Phone = reader.GetString(7)
             };
         }
+
+        public  bool CreateUser(User user)
+        {
+            return false;
+
+        }
+
+
+        public IEnumerable<User> GetUsers()
+        {
+            var persons = new List<Person>();
+
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(GetPersonsCommand, _connection))
+                {
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        persons.Add(CreatePerson(reader));
+                    }
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return null;
+        }
     }
 }

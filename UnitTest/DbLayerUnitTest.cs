@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.Win32;
 using Models;
 
 namespace UnitTest
@@ -8,7 +11,50 @@ namespace UnitTest
     [TestClass]
     public class DbLayerUnitTest
     {
+        [TestMethod]
+        public void CreateUser()
+        {
+            var db = DbLayer.DbLayer.Database;
+            var numberofuserbefore = db.GetUsers().Count();
+            var user = new User()
+            {
+                Id = 0,
+                Username = "Username",
+                Password = "Password"
 
+            };
+            db.CreateUser(user);
+            Assert.AreEqual(numberofuserbefore + 1, db.GetUsers().Count());
+
+        }
+
+        [TestMethod]
+        public void CreateMoreUser()
+        {
+            var db = DbLayer.DbLayer.Database;
+
+
+            var user1 = new User()
+            {
+                Id = 1,
+                Username = "Username",
+                Password = "Password"
+            };
+            var user2 = new User()
+            {
+                Id = 2,
+                Username = "Username",
+                Password = "Password"
+            };
+
+            db.CreateUser(user1);
+            var numberOfuserbefore = db.GetUsers().Count();
+            db.CreateUser(user2);
+
+            Assert.AreEqual(numberOfuserbefore, db.GetUsers().Count());
+
+
+        }
 
         [TestMethod]
         public void AddPerson()
@@ -104,6 +150,8 @@ namespace UnitTest
 
             Assert.AreEqual(numberoFDebt , db.GetDebtsOfPerson(pers).Count());
         }
+
+
 
     }
 }
