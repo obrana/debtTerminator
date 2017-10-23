@@ -22,6 +22,10 @@ namespace DbLayer
                                                         + " from Debt where PersonId=@PersonId";
 
         private const string PersonExistCommand = "select * from Person where CPR=@CPR";
+        private const string GetUsersCommand = "select Id, Username, Password from User";
+        private const string UserExistCommand = "select * from User where Username=@Username";
+        private const string AddUserCommand = "insert into User(Username,Password) values (@Username,@Password)";
+        private const string IncreaseDebtCommand = "update Debt set Amount = @Amount where DebtId=@DebtId";
 
         private static DbLayer _database;
         private SqlConnection _connection;
@@ -52,7 +56,7 @@ namespace DbLayer
         {
             if (PersonExist(person))
             {
-                return false;
+                throw new Exception($"Person wiht CPR: {person.CPR} already exist");
             }
             var affectedRows = 0;
 
@@ -75,7 +79,7 @@ namespace DbLayer
             }
             catch (Exception ex)
             {
-                
+
             }
 
             return affectedRows > 0;
@@ -92,7 +96,7 @@ namespace DbLayer
                     command.Parameters.AddWithValue("@CPR", person.CPR);
 
                     var reader = command.ExecuteReader();
-                    exist= reader.HasRows;
+                    exist = reader.HasRows;
                 }
                 _connection.Close();
             }
@@ -107,7 +111,7 @@ namespace DbLayer
         {
             if (debt.Amout < 0)
             {
-                return false;
+                throw new Exception("Debt about must be heigher than 0");
             }
             var affectedRows = 0;
             try
@@ -193,7 +197,7 @@ namespace DbLayer
                 DebtId = reader.GetInt32(3),
                 DebtStatus = reader.GetBoolean(4),
                 DueDate = reader.GetDateTime(5),
-                PaidAmout = reader.GetDecimal(6)              
+                PaidAmout = reader.GetDecimal(6)
             };
         }
 
@@ -212,26 +216,72 @@ namespace DbLayer
             };
         }
 
-        public  bool CreateUser(User user)
+        public bool CreateUser(User user)
         {
-            return false;
+            if (UserExist(user))
+            {
+                throw new Exception($"User {user.Username} already exist");
+            }
+            var affectedRows = 0;
 
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(AddUserCommand, _connection))
+                {
+                    command.Parameters.AddWithValue("@Username", user.Username);
+                    command.Parameters.AddWithValue("@Password", user.Password);
+
+                    affectedRows = command.ExecuteNonQuery();
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return affectedRows > 0;
+        }
+
+        private bool UserExist(User user)
+        {
+            var exist = false;
+
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(UserExistCommand, _connection))
+                {
+                    command.Parameters.AddWithValue("@Username", user.Username);
+
+                    var reader = command.ExecuteReader();
+                    exist = reader.HasRows;
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return exist;
         }
 
 
         public IEnumerable<User> GetUsers()
         {
-            var persons = new List<Person>();
+            var users = new List<User>();
 
             try
             {
                 _connection.Open();
-                using (var command = new SqlCommand(GetPersonsCommand, _connection))
+                using (var command = new SqlCommand(GetUsersCommand, _connection))
                 {
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        persons.Add(CreatePerson(reader));
+                        users.Add(CreateUserObj(reader));
                     }
                 }
                 _connection.Close();
@@ -241,7 +291,43 @@ namespace DbLayer
 
             }
 
-            return null;
+            return users;
+        }
+
+        public bool IncreaseDebt(Debt debt, decimal increaseValue)
+        {
+            bool result = false;
+            if (increaseValue <= 0)
+            {
+                throw new Exception("Increase value must be higher than 0");
+            }
+            try
+            {
+                _connection.Open();
+                using (var command = new SqlCommand(IncreaseDebtCommand, _connection))
+                {
+                    command.Parameters.AddWithValue("@DebtId", debt.DebtId);
+                    command.Parameters.AddWithValue("@Amount", debt.Amout + increaseValue);
+                    var resultCount = command.ExecuteNonQuery();
+                    result = resultCount > 0;
+                }
+                _connection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+        private User CreateUserObj(SqlDataReader reader)
+        {
+            return new User()
+            {
+                Id = reader.GetInt32(0),
+                Username = reader.GetString(1),
+                Password = reader.GetString(2)
+            };
         }
     }
 }

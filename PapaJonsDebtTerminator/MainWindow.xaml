@@ -5,16 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PapaJonsDebtTerminator"
         xmlns:views="clr-namespace:PapaJonsDebtTerminator.Views"
-        mc:Ignorable="d" Height="520" Width="670"
-        Title="Papa Jon´s - Debt terminator" MinHeight="520" MinWidth="670">
+        xmlns:utils="clr-namespace:PapaJonsDebtTerminator.Utils"
+        mc:Ignorable="d" Width="670" SizeToContent="WidthAndHeight"
+        Title="Papa Jon´s - Debt terminator" MinHeight="520" MinWidth="670" Height="Auto">
+    <Window.Resources>
+        <utils:FlopBoolean x:Key="FlopBoolean"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" HorizontalAlignment="Stretch" MinHeight="155" Margin="10,10,10.2,10" 
-                  VerticalAlignment="Stretch" x:Name="DataGridPersons"
+        <Menu Grid.Row="0">
+            <MenuItem Header="Register new user" Click="CreateNewUser_Click"/>
+        </Menu>
+        <DataGrid Grid.Row="1" HorizontalAlignment="Stretch" MinHeight="155" Margin="10,10,10,10" 
+                  VerticalAlignment="Stretch" x:Name="DataGridPersons" IsReadOnly="True"
                   SelectionChanged="DataGridPersons_OnSelectionChanged" SelectionMode="Single" 
                   SelectionUnit="FullRow" AutoGenerateColumns="False">
             <DataGrid.Columns>
@@ -27,11 +36,32 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch"
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch"
                 Height="100" Margin="10,10,10,10" VerticalAlignment="Stretch">
             <views:AddPersonView x:Name="AddPersonView"/>
         </Border>
-        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" 
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" x:Name="txtDebtsOfPerson" TextAlignment="Center" 
+                       VerticalAlignment="Center" FontSize="15" FontWeight="Bold"
+                       Margin="20 0 0 10"/>
+            <DataGrid Grid.Column="1" HorizontalAlignment="Stretch" MinHeight="100" Margin="10,10,10,10" 
+                      VerticalAlignment="Stretch" x:Name="DataGridDebts" IsReadOnly="True"
+                      SelectionChanged="DataGridDebts_OnSelectionChanged" SelectionMode="Single" 
+                      SelectionUnit="FullRow" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Started" Binding="{Binding DateStart, StringFormat=\{0:dd.MM.yyyy\} }"/>
+                    <DataGridTextColumn Header="Due" Binding="{Binding DueDate, StringFormat=\{0:dd.MM.yyyy\} }"/>
+                    <DataGridTextColumn Header="Paid amout" Binding="{Binding PaidAmout}"/>
+                    <DataGridTextColumn Header="Amout" Binding="{Binding Amout}"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding DebtStatus,Converter={StaticResource FlopBoolean}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" 
                 Margin="10,10,10,10" VerticalAlignment="Stretch">
             <views:AddDebtToPersonView x:Name="AddDebtView"/>
         </Border>

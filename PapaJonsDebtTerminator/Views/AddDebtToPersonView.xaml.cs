@@ -31,8 +31,18 @@ namespace PapaJonsDebtTerminator.Views
             }
         }
 
+        
+
+        public MainWindow MainWindow
+        {
+            get { return _mainWindow; }
+            set { _mainWindow = value; }
+        }
+
         private DbLayer.DbLayer database;
         private Person _selectedPerson;
+        private MainWindow _mainWindow;
+        private Debt ActualDebt;
 
         public AddDebtToPersonView()
         {
@@ -59,12 +69,47 @@ namespace PapaJonsDebtTerminator.Views
                 PaidAmout = decimal.Parse(TxtPaidAmout.Text)
             };
 
-            database.AddDebtToPerson(SelectedPerson, debt);
+            var result = database.AddDebtToPerson(SelectedPerson, debt);
+            if(result)_mainWindow.LoadDebtOfPerson(_selectedPerson);
+        }
+
+        public void FillUpDebt(Debt debt)
+        {
+            if (debt != null)
+            {
+                DpDateFrom.SelectedDate = debt.DateStart;
+                DpDateTo.SelectedDate = debt.DueDate;
+                ChbDebtStatus.IsChecked = debt.DebtStatus;
+                TxtPaidAmout.Text = debt.PaidAmout.ToString();
+                TxtAmout.Text = debt.Amout.ToString();
+                ActualDebt = debt;
+            }
+            else
+            {
+                DpDateFrom.SelectedDate = DateTime.Now;
+                DpDateTo.SelectedDate = DateTime.Now;
+                ChbDebtStatus.IsChecked = false;
+                TxtPaidAmout.Text = string.Empty;
+                TxtAmout.Text = string.Empty;
+            }
         }
 
         private void ChbDebtStatus_OnChecked(object sender, RoutedEventArgs e)
         {
-            ChbDebtStatus.Content = (bool)ChbDebtStatus.IsChecked?"Paid":"Unpaid";
+            ChbDebtStatus.Content = (bool)ChbDebtStatus.IsChecked?"PAID":"UNPAID";
+        }
+
+        private void BtnIncrease_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parsedValue = int.Parse(TxtIncreaseValue.Text);
+                database.IncreaseDebt(ActualDebt, parsedValue);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error");
+            }
         }
     }
 }

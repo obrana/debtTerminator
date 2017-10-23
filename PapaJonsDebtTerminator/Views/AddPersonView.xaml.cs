@@ -38,6 +38,17 @@ namespace PapaJonsDebtTerminator.Views
             database = DbLayer.DbLayer.Database;
         }
 
+        public void FillUpPerson(Person person)
+        {
+            TxtCpr.Text = person.CPR;
+            TxtAddress.Text = person.Address;
+            TxtEmail.Text = person.Email;
+            TxtName.Text = person.Name;
+            TxtPhone.Text = person.Phone;
+            CbGender.SelectedValue = person.Gender;
+            DpDob.SelectedDate = person.DOB;
+        }
+
         private void BtnInsert_OnClick(object sender, RoutedEventArgs e)
         {
             var dob = DpDob.SelectedDate;

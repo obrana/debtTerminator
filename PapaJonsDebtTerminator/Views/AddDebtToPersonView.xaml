@@ -5,34 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PapaJonsDebtTerminator.Views"
              mc:Ignorable="d" Height="169.324" Width="293.507">
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock HorizontalAlignment="Left" Margin="-132,-51,0,0" TextWrapping="Wrap" 
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,-0.4,0.6" Width="294" Height="169">
+        <TextBlock HorizontalAlignment="Left" Margin="5,6,0,0" TextWrapping="Wrap" 
                    Text="Add debt to person:" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-132,-25,0,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="5,33,0,0" TextWrapping="Wrap" 
                    Text="Debt from:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-132,-4,0,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="5,54,0,0" TextWrapping="Wrap" 
                    Text="Debt to:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-132,20,0,0" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="5,78,0,0" TextWrapping="Wrap" 
                    Text="Debt status:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-132,44,0,-3.8" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="5,102,0,0" TextWrapping="Wrap" 
                    Text="Paid amout" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Height="18" Margin="-65,-28,-30.2,0" 
+        <DatePicker HorizontalAlignment="Left" Height="18" Margin="72,30,0,0" 
                  VerticalAlignment="Top" Width="108" x:Name="DpDateFrom" FontSize="8"/>
-        <DatePicker HorizontalAlignment="Left" Height="18" Margin="-65,-6,-30.2,0"
+        <DatePicker HorizontalAlignment="Left" Height="18" Margin="72,52,0,0"
                  VerticalAlignment="Top" Width="108" x:Name="DpDateTo" FontSize="8"/>
-        <CheckBox HorizontalAlignment="Left" Height="18" Margin="-65,18,-30.2,0" 
+        <CheckBox HorizontalAlignment="Left" Height="18" Margin="72,76,0,0" 
                  VerticalAlignment="Top" Width="108" x:Name="ChbDebtStatus" 
                  Content="Paid/Unpaid" Checked="ChbDebtStatus_OnChecked"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,41,-30.2,-3.8" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="72,98,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtPaidAmout"/>
-        <Button Content="Add debt" HorizontalAlignment="Left" Margin="-64,87,-31.2,-49.8" 
+        <Button Content="Add debt" HorizontalAlignment="Left" Margin="73,145,0,0" 
                 VerticalAlignment="Top" Width="108" Height="18" x:Name="BtnAddDebt"
                 Click="BtnAddDebt_OnClick"/>
-        <TextBlock HorizontalAlignment="Left" Margin="-132,66,0,-25.8" TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left" Margin="5,123,0,0" TextWrapping="Wrap" 
                    Text="Amout:" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="18" Margin="-65,64,-30.2,-26.8" 
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="72,122,0,0" 
                  TextWrapping="Wrap" VerticalAlignment="Top" Width="108" x:Name="TxtAmout"/>
         <TextBlock HorizontalAlignment="Left" Margin="18,-51,-135.2,0" TextWrapping="WrapWithOverflow" 
                    x:Name="LblNamePerson" VerticalAlignment="Top" FontSize="15" FontWeight="Bold" Width="130"/>
+        <TextBlock HorizontalAlignment="Center" Margin="190,98,5,53" TextWrapping="Wrap" Text="Increase value" 
+                   FontSize="15" VerticalAlignment="Center" Height="18" Width="99"/>
+        <TextBox HorizontalAlignment="Left" Height="18" Margin="190,121,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" Width="94" HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center" x:Name="TxtIncreaseValue"/>
+        <Button Content="Increase" HorizontalAlignment="Left" Margin="190,144,0,0" 
+                VerticalAlignment="Top" Width="94" Height="18" Click="BtnIncrease_Click"/>
     </Grid>
 </UserControl>
