@@ -24,6 +24,7 @@ namespace PapaJonsDebtTerminator.Views
         public RegistrationWindow()
         {
             InitializeComponent();
+
             dbLayer = DbLayer.DbLayer.Database;
         }
 
@@ -34,11 +35,21 @@ namespace PapaJonsDebtTerminator.Views
                 MessageBox.Show("Login and password is not corect!", "Error");
                 return;
             }
-            dbLayer.CreateUser(new User()
+            var result = dbLayer.CreateUser(new User()
             {
                 Username = TxtLogin.Text,
                 Password = TxtPassword.Text
             });
+
+            if (result)
+            {
+                MessageBox.Show("User " + TxtLogin.Text + " was created!", "Successful", MessageBoxButton.OK);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("User " + TxtLogin.Text + " was not created!", "Fail", MessageBoxButton.OK);
+            }
         }
 
         private void ButtonBack_OnClick(object sender, RoutedEventArgs e)

@@ -13,13 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Models;
+using PapaJonsDebtTerminator.Utils;
 
 namespace PapaJonsDebtTerminator.Views
 {
     /// <summary>
     /// Interaction logic for AddDebtToPersonView.xaml
     /// </summary>
-    public partial class AddDebtToPersonView : UserControl
+    public partial class AddDebtToPersonView : UserControl,IUpdater
     {
         public Person SelectedPerson
         {
@@ -31,23 +32,15 @@ namespace PapaJonsDebtTerminator.Views
             }
         }
 
-        
-
-        public MainWindow MainWindow
-        {
-            get { return _mainWindow; }
-            set { _mainWindow = value; }
-        }
-
         private DbLayer.DbLayer database;
         private Person _selectedPerson;
-        private MainWindow _mainWindow;
         private Debt ActualDebt;
 
         public AddDebtToPersonView()
         {
             InitializeComponent();
 
+            UpdateControler.controls.Add(this);
             InitView();
         }
         private void InitView()
@@ -70,7 +63,15 @@ namespace PapaJonsDebtTerminator.Views
             };
 
             var result = database.AddDebtToPerson(SelectedPerson, debt);
-            if(result)_mainWindow.LoadDebtOfPerson(_selectedPerson);
+            if (result)
+            {
+                MessageBox.Show("The debt was added!", "Success", MessageBoxButton.OK);
+                UpdateControler.Update();
+            }
+            else
+            {
+                MessageBox.Show("The debt was not added!", "Success", MessageBoxButton.OK);
+            }
         }
 
         public void FillUpDebt(Debt debt)
@@ -104,12 +105,27 @@ namespace PapaJonsDebtTerminator.Views
             try
             {
                 var parsedValue = int.Parse(TxtIncreaseValue.Text);
-                database.IncreaseDebt(ActualDebt, parsedValue);
+                var result = database.IncreaseDebt(ActualDebt, parsedValue);
+                if (result)
+                {
+                    FillUpDebt(ActualDebt);
+                    UpdateControler.Update();
+                    MessageBox.Show("The debt amount was increased!", "Success",MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox.Show("The debt amount was not increased!", "Success", MessageBoxButton.OK);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message, "Error");
             }
+        }
+
+        public void Update()
+        {
+            FillUpDebt(ActualDebt);
         }
     }
 }

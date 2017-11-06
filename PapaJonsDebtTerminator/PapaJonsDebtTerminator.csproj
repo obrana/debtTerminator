@@ -55,6 +55,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\Converters.cs" />
+    <Compile Include="Utils\IUpdater.cs" />
+    <Compile Include="Utils\UpdateControler.cs" />
     <Compile Include="Views\AddDebtToPersonView.xaml.cs">
       <DependentUpon>AddDebtToPersonView.xaml</DependentUpon>
     </Compile>

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PapaJonsDebtTerminator"
         xmlns:views="clr-namespace:PapaJonsDebtTerminator.Views"
         xmlns:utils="clr-namespace:PapaJonsDebtTerminator.Utils"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" Width="670" SizeToContent="WidthAndHeight"
         Title="Papa Jon´s - Debt terminator" MinHeight="520" MinWidth="670" Height="Auto">
     <Window.Resources>

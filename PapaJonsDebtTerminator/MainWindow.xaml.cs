@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Models;
+using PapaJonsDebtTerminator.Utils;
 using PapaJonsDebtTerminator.Views;
 
 namespace PapaJonsDebtTerminator
@@ -20,7 +21,7 @@ namespace PapaJonsDebtTerminator
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window,IUpdater
     {
         private DbLayer.DbLayer database;
         public MainWindow()
@@ -36,6 +37,7 @@ namespace PapaJonsDebtTerminator
             AddPersonView.MainWindow = this;
             
             LoadPersons();
+            UpdateControler.controls.Add(this);
         }
 
         public void LoadPersons()
@@ -47,6 +49,7 @@ namespace PapaJonsDebtTerminator
                 LoadDebtOfPerson(DataGridPersons.SelectedItem as Person);
             }
         }
+
         public void LoadDebtOfPerson(Person person)
         {
             DataGridDebts.ItemsSource = database.GetDebtsOfPerson(person);
@@ -86,6 +89,11 @@ namespace PapaJonsDebtTerminator
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();
             registrationWindow.ShowDialog();
+        }
+
+        public void Update()
+        {
+            LoadDebtOfPerson(DataGridPersons.SelectedItem as Person);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace DbLayer
 
         private const string PersonExistCommand = "select * from Person where CPR=@CPR";
         private const string GetUsersCommand = "select Id, Username, Password from User";
-        private const string UserExistCommand = "select * from User where Username=@Username";
-        private const string AddUserCommand = "insert into User(Username,Password) values (@Username,@Password)";
+        private const string UserExistCommand = "select * from Users where Username=@Username";
+        private const string AddUserCommand = "insert into Users(Username,Password) values (@Username,@Password)";
         private const string IncreaseDebtCommand = "update Debt set Amount = @Amount where DebtId=@DebtId";
 
         private static DbLayer _database;
